@@ -1,5 +1,11 @@
 const { Client, GatewayIntentBits } = require("discord.js");
-const config = require("./config.json");
+
+const token = process.env.TOKEN;
+
+if (!token) {
+  console.error("TOKEN is missing. Add TOKEN in Railway Variables.");
+  process.exit(1);
+}
 
 const client = new Client({
   intents: [
@@ -7,8 +13,8 @@ const client = new Client({
   ]
 });
 
-client.once("ready", () => {
+client.once("clientReady", () => {
   console.log(`MonkeyCore Notify is online as ${client.user.tag}`);
 });
 
-client.login(config.token);
+client.login(token);
